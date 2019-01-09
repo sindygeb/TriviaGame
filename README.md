@@ -1,3 +1,3 @@
 # TriviaGame
 
-A aimple trivia game
+A simple trivia game!
