@@ -1,0 +1,45 @@
+body {
+    background-image: url("../images/background.png");
+}
+h1 {
+    background-color: #324144;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 36px;
+    color: #ffffff;
+    padding: 50px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 50px;
+
+}
+p {
+    font-size: 24px;
+    color: black;
+}
+
+li {
+    list-style: none;
+    text-align: left;
+    vertical-align: middle;
+    margin: auto;
+}
+.quizContainer {
+    background-color: #ffffff;
+    text-align: left;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-top: 50px;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+button {
+    background-color: #324144;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
