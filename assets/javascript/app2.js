@@ -73,7 +73,7 @@ var trivia = [
         correctAnswer: 2
     }, {
         question: "BONUS QUESTION: Where in the world is Carmen Sandiego?",
-        photo: "https://img.buzzfeed.com/buzzfeed-static/static/2016-10/18/12/enhanced/buzzfeed-prod-web15/enhanced-13356-1476808161-1.jpg?downsize=800:*&output-format=auto&output-quality=auto",
+        photo: "https://images-na.ssl-images-amazon.com/images/I/919BmUO1h7L._SL1500_.jpg",
         answers: ['The Last Place You Would Expect', 'Everywhere', 'Right Behind You!', 'Who?'],
         correctAnswer: 0
     }
@@ -88,14 +88,19 @@ var intervalId;
 
 $(document).ready(function () {
 
+    //$(".nextButton").hide();
+
     $("#start-button").on("click", function() {
-       
+        //quiz start function
         displayCurrentQuestion();
+        //$(".nextButton").show();
     });
     
+    $(".quizContainer").append("<button class='nextButton'>" + "Next Question!" + "</button>");
+    $(".nextButton").hide();
+
     // Click function for next
     $(this).find(".nextButton").on("click", function () {
-
         if (!quizEnd) {
 
             value = $("input[type='radio']:checked").val();
@@ -115,15 +120,16 @@ $(document).ready(function () {
                 displayScore();
                 stop();
                 alert("You did it! You finished all the questions! Score: " + correctAnswers);
-            
+                
                 // Change the text in the next button to ask if user wants to play again
                 $(document).find(".nextButton").text("Play Again?");
+                number = 0;
                 quizEnd = true;
             }
         // quiz is over
         } else { 
             quizEnd = false;
-            $(document).find(".nextButton").text("Play Again?");
+            $(document).find(".nextButton").text("Next Question");
             resetQuiz();
             displayCurrentQuestion();
             hideScore();
@@ -136,8 +142,8 @@ function displayCurrentQuestion() {
 
     runTimer();
     $("#start-button").hide();
+    $(".nextButton").show();
     $("#show-number").html("<h2>Time Left:</h2>");
-    $(".quizContainer").append("<button class='nextButton'>" + "Next Question!" + "</button>");
 
     var question = trivia[currentQuestion].question;
     var photo = trivia[currentImage].photo;
@@ -160,11 +166,11 @@ function displayCurrentQuestion() {
         //$('<img src=' + imgPlace + '>').appendTo(imgShow);
     }
 }
-    var number = 10;
+    var number = 11;
     var intervalId;
 
     function runTimer() {
-        number = 10;
+        number = 11;
         if ( !intervalId) {
         intervalId = setInterval(decrement, 1000);
         }
@@ -178,6 +184,7 @@ function displayCurrentQuestion() {
             stop();
             alert("Times Up!" + " Your Score: " + correctAnswers + " " + "Click OK to play again!");
             resetQuiz();
+            $(document).find(".nextButton").text("Play Again?");
             quizEnd = true;
         }
     }
@@ -195,7 +202,7 @@ function displayCurrentQuestion() {
     }
 
 function displayScore() {
-    $(document).find(".quizContainer > .result").text("You scored: " + correctAnswers + " out of: " + trivia.length);
+    $(document).find(".quizContainer > .result").text("You scored " + correctAnswers + " out of " + trivia.length);
     $(document).find(".quizContainer > .result").show();
 }
 

@@ -7,7 +7,7 @@ body {
 h1 {
     background-color: #324144;
     font-family: 'Quicksand', sans-serif;
-    font-size: 36px;
+    font-size: 30px;
     color: #ffffff;
     padding: 50px;
     margin: auto;
@@ -57,9 +57,17 @@ input {
 }
 .choiceList {
     text-align: center;
-    margin-left: 340px;
+    margin-left: 320px;
 }
 .question {
     padding: 20px;
     font-size: 26px;
+}
+#start-button {
+    font-size: 36px;
+    margin-top: 120px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
