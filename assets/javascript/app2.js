@@ -71,6 +71,11 @@ var trivia = [
         photo: "https://img.buzzfeed.com/buzzfeed-static/static/2016-10/18/12/enhanced/buzzfeed-prod-web15/enhanced-13356-1476808161-1.jpg?downsize=800:*&output-format=auto&output-quality=auto",
         answers: ['Argentina', 'Uruguay', 'Brazil', 'Peru'],
         correctAnswer: 2
+    }, {
+        question: "BONUS QUESTION: Where in the world is Carmen Sandiego?",
+        photo: "https://img.buzzfeed.com/buzzfeed-static/static/2016-10/18/12/enhanced/buzzfeed-prod-web15/enhanced-13356-1476808161-1.jpg?downsize=800:*&output-format=auto&output-quality=auto",
+        answers: ['The Last Place You Would Expect', 'Everywhere', 'Right Behind You!', 'Who?'],
+        correctAnswer: 0
     }
 ];
 
@@ -84,56 +89,41 @@ var intervalId;
 $(document).ready(function () {
 
     $("#start-button").on("click", function() {
-        //quiz start function
+       
         displayCurrentQuestion();
     });
     
-    //Hide the message box until we need it
-    $(this).find(".pickAnswer").hide();
-
-    //add a next button to move quiz along
-    $(".quizContainer").append("<button class='nextButton'>" + "Next Question!" + "</button>");
-
     // Click function for next
     $(this).find(".nextButton").on("click", function () {
+
         if (!quizEnd) {
 
             value = $("input[type='radio']:checked").val();
 
-            //if the user clicks the next button without picking an answer first (show message box with message)
-            if (value == undefined) {
-                $(document).find(".pickAnswer").text("Please choose an answer!");
-                $(document).find(".pickAnswer").show();
-            } else {
-                //keep message box hidden
-                $(document).find(".pickAnswer").hide();
-
-                //match the chosen answer to the array of correct answers
-                if (value == trivia[currentQuestion].correctAnswer) {
-                    correctAnswers++;
-                }
-
-                currentQuestion++;
-                currentImage++;
-
-                //keep loading new question if it's less than the array number
-                if (currentQuestion < trivia.length) {
-                    displayCurrentQuestion();
-                    //if the currentQuestion = trivia length - last question
-                } else {
-                    displayScore();
-                    stop();
-                    alert("You did it! You finished all the questions! Score: " + correctAnswers);
-                    // $(document).find(".nextButton").toggle();
-                    // $(document).find(".playAgainButton").toggle();
-                    // Change the text in the next button to ask if user wants to play again
-                    $(document).find(".nextButton").text("Play Again?");
-                    quizEnd = true;
-                }
+            if (value == trivia[currentQuestion].correctAnswer) {
+                correctAnswers++;
             }
-        } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
+
+            currentQuestion++;
+            currentImage++;
+
+            //keep loading new question if it's less than the array number
+            if (currentQuestion < trivia.length) {
+                displayCurrentQuestion();
+                //if the currentQuestion = trivia length - last question
+            } else {
+                displayScore();
+                stop();
+                alert("You did it! You finished all the questions! Score: " + correctAnswers);
+            
+                // Change the text in the next button to ask if user wants to play again
+                $(document).find(".nextButton").text("Play Again?");
+                quizEnd = true;
+            }
+        // quiz is over
+        } else { 
             quizEnd = false;
-            $(document).find(".nextButton").text("Next Question");
+            $(document).find(".nextButton").text("Play Again?");
             resetQuiz();
             displayCurrentQuestion();
             hideScore();
@@ -141,11 +131,13 @@ $(document).ready(function () {
     });
 });
 
-// This displays the current question AND the answers
+// Brings a question from the array forward
 function displayCurrentQuestion() {
 
     runTimer();
     $("#start-button").hide();
+    $("#show-number").html("<h2>Time Left:</h2>");
+    $(".quizContainer").append("<button class='nextButton'>" + "Next Question!" + "</button>");
 
     var question = trivia[currentQuestion].question;
     var photo = trivia[currentImage].photo;
